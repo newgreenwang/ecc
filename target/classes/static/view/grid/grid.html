@@ -1,0 +1,49 @@
+<style>
+    .grid{
+        width: 600px;
+        height: 200px;
+    }
+</style>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">ProjectName</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">控制面板</a></li>
+                <li><a href="#">个人设置</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row" style="margin-top:50px;">
+        <div class="col-md-1">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview</a></li>
+                <li><a href="#">报告</a></li>
+                <li><a href="#">分析</a></li>
+                <li><a href="#">导出</a></li>
+            </ul>
+        </div>
+        <div class="col-md-11" style="padding-left:0px;">
+            <div class="page-header">
+                过滤条件
+            </div>
+            <div class="col-md-6">
+                <div ui-grid="grid1" ui-grid-pagination class="grid"></div>
+                <br/><br/>
+                <div ui-grid="grid2" ui-grid-pagination class="grid"></div>
+            </div>
+            <div class="col-md-6" style="margin-top:-50px;">
+                <div id="mainChart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
