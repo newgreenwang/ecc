@@ -27,7 +27,7 @@ public class ActiveFlowController {
 		
 		for(int i=0; i<100; i++){
 			ActiveFlow flow = new ActiveFlow();
-			flow.setActiveFlowTime(new Date());
+			flow.setRollingTime(new Date().getTime());
 			flow.setDestination("192.168.2." + (int)(200 * Math.random()));
 			flow.setSource("192.168.2."+ (int)(200 * Math.random()));
 			flow.setSumB(new Long(i*10000));

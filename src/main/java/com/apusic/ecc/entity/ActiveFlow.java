@@ -9,7 +9,7 @@ public class ActiveFlow {
 	@Id
 	private String id;
 
-	private Date activeFlowTime;
+	private Long rollingTime;
 	
 	private String source;
 	
@@ -43,13 +43,6 @@ public class ActiveFlow {
 		this.destination = destination;
 	}
 
-	public Date getActiveFlowTime() {
-		return activeFlowTime;
-	}
-
-	public void setActiveFlowTime(Date activeFlowTime) {
-		this.activeFlowTime = activeFlowTime;
-	}
 
 	public Long getSumB() {
 		return sumB;
@@ -65,5 +58,13 @@ public class ActiveFlow {
 
 	public void setSumP(Long sumP) {
 		this.sumP = sumP;
+	}
+
+	public Long getRollingTime() {
+		return rollingTime;
+	}
+
+	public void setRollingTime(Long rollingTime) {
+		this.rollingTime = rollingTime;
 	}
 }

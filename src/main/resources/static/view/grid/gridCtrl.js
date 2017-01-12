@@ -9,7 +9,7 @@ angular.module('gridModule',[]).controller('gridCtrl',['$scope', '$http',functio
             columnDefs:[
                 {name:'source'},
                 {name:'destination'},
-                {name:'activeFlowTime'},
+                {name:'rollingTime',displayName:'收集时间',type: 'date', cellFilter: 'date:"yyyy-MM-dd"'},
                 {name:'sumB'},
                 {name:'sumP'}
             ]
@@ -20,7 +20,7 @@ angular.module('gridModule',[]).controller('gridCtrl',['$scope', '$http',functio
         columnDefs:[
             {name:'source'},
                 {name:'destination'},
-                {name:'activeFlowTime'},
+                {name:'rollingTime',displayName:'收集时间',type: 'date', cellFilter: 'date:"yyyy-MM-dd"'},
                 {name:'sumB'},
                 {name:'sumP'}
         ]
@@ -31,32 +31,96 @@ angular.module('gridModule',[]).controller('gridCtrl',['$scope', '$http',functio
        $scope.grid2.data = data;
         //$scope.grid3.data = data;
     });
+    
     var myChart = echarts.init(document.getElementById('mainChart'));
-    myChart.setOption ({
-        tooltip : {
-            trigger: 'axis'
-        },
-        toolbox: {
-            show : true
-        },
-        calculable : true,
-        xAxis : [
-            {
-                type : 'category',
-                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'蒸发量',
-                type:'bar',
-                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-            }
-        ]
+//    var base = +new Date(1968, 9, 3);
+//    var oneDay = 24 * 3600 * 1000;
+//    var date = [];
+//
+//    var data = [Math.random() * 300];
+//
+//    for (var i = 1; i < 20000; i++) {
+//        var now = new Date(base += oneDay);
+//        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+//        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+//    }
+
+//    console.log(data);
+//    console.log(date);
+    $http.get("traffic/map").success(function(data){
+    	myChart.setOption ({
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            title: {
+                left: 'center',
+                text: '大数据量面积图',
+            },
+            toolbox: {
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: data.timeList
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%']
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 0,
+                end: 10
+            }, {
+                start: 0,
+                end: 10,
+                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                handleSize: '80%',
+                handleStyle: {
+                    color: '#fff',
+                    shadowBlur: 3,
+                    shadowColor: 'rgba(0, 0, 0, 0.6)',
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 2
+                }
+            }],
+            series: [
+                {
+                    name:'模拟数据',
+                    type:'line',
+                    smooth:true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(255, 70, 131)'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 158, 68)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 70, 131)'
+                            }])
+                        }
+                    },
+                    data: data.trafficList
+                }
+            ]
+        });
     });
+    
 }]);
