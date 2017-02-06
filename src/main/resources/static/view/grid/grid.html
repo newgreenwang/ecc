@@ -1,8 +1,22 @@
 <style>
     .grid{
         width: 600px;
-        height: 200px;
+        height: 400px;
     }
+    .link_on{
+     background:#c8e1fa; 
+     border:1px solid #5c93cb; 
+     border-radius:3px;
+    }
+    a.link_on:hover{
+    text-decoration: none;
+    }
+    a {
+    padding:4px 6px; 
+    font-size:14px; 
+    color:#000;
+    }
+    
 </style>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -30,15 +44,14 @@
         </div>
         <div class="col-md-11" style="padding-left:0px;">
             <div class="page-header">
-                过滤条件
+                过滤条件 <a ng-click="getToday()" href="#" ng-class="linkToday">当天</a> <a ng-click="getWeek()" href="#" ng-class="linkWeek">一周内</a>
             </div>
             <div class="col-md-6">
                 <div ui-grid="grid1" ui-grid-pagination class="grid"></div>
                 <br/><br/>
-                <div ui-grid="grid2" ui-grid-pagination class="grid"></div>
             </div>
             <div class="col-md-6" style="margin-top:-50px;">
-                <div id="mainChart" style="height: 300px;"></div>
+                <div id="mainChart" style="height: 600px;"></div>
             </div>
         </div>
     </div>

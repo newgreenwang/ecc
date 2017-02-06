@@ -9,7 +9,8 @@ import java.util.List;
 public class TrafficSpickesResponse extends CodedResponse{
 
 	private List<String> timeList;
-	private List<Long> trafficList;
+	private List<Long> trafficOutList;
+	private List<Long> trafficInList;
 	
 	public List<String> getTimeList() {
 		return timeList;
@@ -17,11 +18,16 @@ public class TrafficSpickesResponse extends CodedResponse{
 	public void setTimeList(List<String> timeList) {
 		this.timeList = timeList;
 	}
-	public List<Long> getTrafficList() {
-		return trafficList;
+	public List<Long> getTrafficOutList() {
+		return trafficOutList;
 	}
-	public void setTrafficList(List<Long> trafficList) {
-		this.trafficList = trafficList;
+	public void setTrafficOutList(List<Long> trafficOutList) {
+		this.trafficOutList = trafficOutList;
 	}
-	
+	public List<Long> getTrafficInList() {
+		return trafficInList;
+	}
+	public void setTrafficInList(List<Long> trafficInList) {
+		this.trafficInList = trafficInList;
+	}
 }

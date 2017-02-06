@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +18,14 @@ public class ActiveFlowController {
 	@Autowired
 	private ActiveFlowRepository activeFlowRepository;
 	
-	@RequestMapping("/all")
-	public List<ActiveFlow> findAll(){
-		return activeFlowRepository.findAll();
+	@RequestMapping("/all/{flag}")
+	public List<ActiveFlow> findAll(@PathVariable("flag") String flag){
+		if("today".equals(flag)){
+			return activeFlowRepository.findByRollingTimeBetweenOrderBySumBDesc(1483951462665L, 1483951462681L);
+		}else{
+		
+			return activeFlowRepository.findByOrderBySumBDesc();
+		}
 	}
 	
 	@RequestMapping("/add")
